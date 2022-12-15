@@ -33,3 +33,21 @@ class MenuItems(models.Model):
         max_digits=6,
         decimal_places=2
     )
+
+class RecipeRequirements(models.Model):
+    ingredient = models.ForeignKey(
+        Ingredients,
+        on_delete=models.CASCADE
+    )
+    menu_item = models.ForeignKey(
+        MenuItems,
+        on_delete=models.CASCADE
+    )
+    quantity = models.IntegerField(default=0)
+
+class Purchases(models.Model):
+    menu_item = models.ForeignKey(
+        MenuItems,
+        on_delete=models.CASCADE
+    )
+    timestamp = models.DateTimeField()
