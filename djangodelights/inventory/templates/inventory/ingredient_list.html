@@ -1,0 +1,26 @@
+{% extends 'inventory/base.html' %}
+
+{% block content %}
+<table>
+    <thead>
+        <th scope="col">Name</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Unit</th>
+        <th scope="col">Price/Unit</th>
+        <th scope="col">Action</th>
+    </thead>
+    <tbody>
+        {% for item in ingredients %}
+        <tr>
+            <th scope="row">{{ item.name|title }}</th>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.unit }}</td>
+            <td>{{ item.unit_price }}</td>
+            <td><a href="#">Edit</a>
+                <a href="#">Remove</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'addingredient' %}">Add Ingredient</a>
+{% endblock %}

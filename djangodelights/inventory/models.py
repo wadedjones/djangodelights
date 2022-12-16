@@ -22,6 +22,9 @@ class MenuItems(models.Model):
     def __str__(self):
         return f'{self.title.title()} - ${self.price}'
 
+    def is_available(self):
+        return all(x.in_stock for x in self.reciperequirements_set.all())
+
 class RecipeRequirements(models.Model):
     ingredient = models.ForeignKey(
         Ingredients,
@@ -35,6 +38,10 @@ class RecipeRequirements(models.Model):
 
     def __str__(self):
         return f"{self.ingredient.name.title()} for {self.menu_item.title.title()}, total of {self.quantity}"
+
+    def in_stock(self):
+        return self.quantity <= self.ingredient.quantity
+
 
 class Purchases(models.Model):
     menu_item = models.ForeignKey(
