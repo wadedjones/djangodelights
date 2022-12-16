@@ -16,7 +16,7 @@
             <td>{{ item.quantity }}</td>
             <td>{{ item.unit }}</td>
             <td>{{ item.unit_price }}</td>
-            <td><a href="#">Edit</a>
+            <td><a href="{% url 'editingredient' item.id %}">Edit</a>
                 <a href="#">Remove</a></td>
         </tr>
         {% endfor %}
