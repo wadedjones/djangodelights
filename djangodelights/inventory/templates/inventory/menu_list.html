@@ -1,0 +1,30 @@
+{% extends 'inventory/base.html' %}
+
+{% block title %}
+<title>Menu Items</title>
+{% endblock %}
+
+{% block content %}
+
+<table>
+    <thead>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Action</th>
+    </thead>
+    <tbody>
+        {% for item in menu_items %}
+        <tr>
+            <th scope="row">{{ item.title|title }}</th>
+            <td>${{ item.price }}</td>
+            <td>
+                <a href="{% url 'editmenuitem' item.id %}">Edit</a>
+                <a href="{% url 'deletemenuitem' item.id %}">Remove</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'addmenuitem' %}">Add Menu Item</a>
+
+{% endblock %}

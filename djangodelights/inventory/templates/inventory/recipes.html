@@ -1,0 +1,18 @@
+{% extends 'inventory/base.html' %}
+
+{% block content %}
+
+{% for i in menu_item %}
+    <p>{{ i.title }}</p>
+    <table>
+    {% for item in rr %}
+        {% if i.id == item.menu_item.id %}
+            <td>{{ item.ingredient.name|title }}</td>
+            <td>- {{ item.quantity }}</td>
+            <td>{{ item.ingredient.unit|title }} |</td>
+        {% endif %}
+    {% endfor %}
+    </table>
+{% endfor %}
+
+{% endblock %}

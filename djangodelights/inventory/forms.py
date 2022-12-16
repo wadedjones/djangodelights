@@ -13,3 +13,11 @@ class IngredientForm(forms.ModelForm):
 
     def get_absolute_url(self):
         return '/'
+
+class MenuItemForm(forms.ModelForm):
+    class Meta:
+        model = MenuItems
+        fields = '__all__'
+
+    def get_absolute_url(self):
+        return '/'
