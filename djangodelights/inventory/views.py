@@ -1,7 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import AddIngredient, EditIngredient
-from django.views.generic.edit import UpdateView
-
+from .forms import IngredientForm
 from .models import (
     Ingredients,
     MenuItems,
@@ -18,9 +16,9 @@ def ingredient_list(request):
     return render(request, 'inventory/ingredient_list.html', context)
 
 def add_ingredient(request):
-    form = AddIngredient()
+    form = IngredientForm()
     if request.method == 'POST':
-        form = AddIngredient(request.POST)
+        form = IngredientForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect(ingredient_list)
@@ -30,12 +28,21 @@ def add_ingredient(request):
 
 def edit_ingredient(request, pk):
     ingredient = Ingredients.objects.get(id=pk)
-    form = EditIngredient(instance=ingredient)
+    form = IngredientForm(instance=ingredient)
     if request.method == 'POST':
-        form = EditIngredient(request.POST, request.FILES, instance=ingredient)
+        form = IngredientForm(request.POST, request.FILES, instance=ingredient)
         if form.is_valid():
             form.save()
             return redirect(ingredient_list)
     
     context = {'ingredient': ingredient, 'form': form}
     return render(request, 'inventory/edit_ingredient.html', context)
+
+def delete_ingredient(request, pk):
+    ingredient = Ingredients.objects.get(id=pk)
+    if request.method == 'POST':
+        ingredient.delete()
+        return redirect(ingredient_list)
+
+    context = {'ingredient': ingredient}
+    return render(request, 'inventory/delete_ingredient.html', context)

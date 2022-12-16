@@ -6,15 +6,10 @@ from .models import (
     Purchases
 )
 
-class AddIngredient(forms.ModelForm):
+class IngredientForm(forms.ModelForm):
     class Meta:
         model = Ingredients
         fields = '__all__'
 
     def get_absolute_url(self):
         return '/'
-
-class EditIngredient(forms.ModelForm):
-    class Meta:
-        model = Ingredients
-        fields = '__all__'
