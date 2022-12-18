@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<table class="table table-hover table-borderless">
+<table class="table table-hover table-borderless" style="white-space:nowrap; width:1%">
     <thead>
         <th scope="col">Name</th>
         <th scope="col">Price</th>
@@ -18,14 +18,18 @@
             <th scope="row">{{ item.title|title }}</th>
             <td>${{ item.price }}</td>
             <td>
-                <a href="{% url 'editmenuitem' item.id %}">Edit</a>
-                <a href="{% url 'deletemenuitem' item.id %}">Remove</a>
-                <a href="{% url 'purchaseitem' item.id %}">Purchase</a>
+                <a href="{% url 'purchaseitem' item.id %}">
+                <button type="button" class="btn btn-outline-primary btn-sm">Purchase</button></a>
+                <a href="{% url 'editmenuitem' item.id %}">
+                <button type="button" class="btn btn-outline-secondary btn-sm">Edit</button></a>
+                <a href="{% url 'deletemenuitem' item.id %}">
+                <button type="button" class="btn btn-outline-danger btn-sm">Remove</button></a>
             </td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
-<a href="{% url 'addmenuitem' %}">Add Menu Item</a>
+<a href="{% url 'addmenuitem' %}">
+<button type="button" class="btn btn-primary">Add Menu Item</button></a>
 
 {% endblock %}

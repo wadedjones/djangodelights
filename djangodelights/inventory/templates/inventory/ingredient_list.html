@@ -1,7 +1,7 @@
 {% extends 'inventory/base.html' %}
 
 {% block content %}
-<table class="table table-hover table-borderless">
+<table class="table table-hover table-borderless" style="white-space:nowrap; width:1%">
     <thead>
         <th scope="col">Name</th>
         <th scope="col">Quantity</th>
@@ -16,11 +16,16 @@
             <td>{{ item.quantity }}</td>
             <td>{{ item.unit }}</td>
             <td>{{ item.unit_price }}</td>
-            <td><a href="{% url 'editingredient' item.id %}">Edit</a>
-                <a href="{% url 'deleteingredient' item.id %}">Remove</a></td>
+            <td><a href="{% url 'editingredient' item.id %}">
+                <button type="button" class="btn btn-outline-primary btn-sm">Update</button></a>
+                <a href="{% url 'deleteingredient' item.id %}">
+                <button type="button" class="btn btn-outline-danger btn-sm">Remove</button></a></td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
-<a href="{% url 'addingredient' %}">Add Ingredient</a>
+<a href="{% url 'addingredient' %}">
+<button type="button" class="btn btn-primary">Add Ingredient</button>
+</a>
+
 {% endblock %}

@@ -24,14 +24,14 @@
                 {% endif %}
             </li>
             <li class="nav-item">
-                {% if request.resolver_match.url_name == 'menulist' %}
+                {% if request.resolver_match.url_name == 'menulist' or request.resolver_match.url_name == 'addmenuitem' %}
                 <a class="nav-link active" aria-current="page" href="{% url 'menulist' %}">Menu</a>
                 {% else %}
                 <a class="nav-link" href="{% url 'menulist' %}">Menu</a>
                 {% endif %}
             </li>
             <li class="nav-item">
-                {% if request.resolver_match.url_name == 'ingredientlist' %}
+                {% if request.resolver_match.url_name == 'ingredientlist' or request.resolver_match.url_name == 'addingredient' %}
                 <a class="nav-link active" aria-current="page" href="{% url 'ingredientlist' %}">Ingredients</a>
                 {% else %}
                 <a class="nav-link" href="{% url 'ingredientlist' %}">Ingredients</a>

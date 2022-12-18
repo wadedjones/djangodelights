@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<table class="table table-hover table-borderless">
+<table class="table table-hover table-borderless" style="white-space:nowrap; width:1%">
     <thead>
         <th scope="col">Name</th>
         <th scope="col">Price</th>
@@ -23,16 +23,16 @@
     </tbody>
     <tfoot>
         <tr>
-            <th scope="row">Totals</th>
-            <th>${{ total_price }}</th>
+            <th scope="row" class="table-secondary">Totals</th>
+            <th class="table-secondary">${{ total_price }}</th>
         </tr>
         <tr>
-            <th scope="row">Inventory</th>
-            <th>-${{ inventory_cost }}</th>
+            <th scope="row" class="table-danger">Inventory</th>
+            <th class="table-danger">${{ inventory_cost }}</th>
         </tr>
         <tr>
-            <th scope="row">Revenue</th>
-            <th>${{ revenue }}</th>
+            <th scope="row" class="table-success">Revenue</th>
+            <th class="table-success">${{ revenue }}</th>
         </tr>
     </tfoot>
 </table>

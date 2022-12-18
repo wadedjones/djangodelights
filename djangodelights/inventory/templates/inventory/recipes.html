@@ -2,17 +2,20 @@
 
 {% block content %}
 
-{% for i in menu_item %}
-    <p>{{ i.title }}</p>
-    <table>
-    {% for item in rr %}
-        {% if i.id == item.menu_item.id %}
-            <td>{{ item.ingredient.name|title }}</td>
-            <td>- {{ item.quantity }}</td>
-            <td>{{ item.ingredient.unit|title }} |</td>
-        {% endif %}
-    {% endfor %}
-    </table>
-{% endfor %}
+<table class="table table-hover table-borderless" style="white-space:nowrap; width:1%">
+    <tbody>
+        {% for i in menu_item %} 
+            <tr>
+                <th scope="row">{{ i.title }}</th>
+                    {% for item in rr %}
+                        {% if i.id == item.menu_item.id %}
+                            <td>{{ item.ingredient.name|title }}</td>
+                            <td>{{ item.quantity }}: {{ item.ingredient.unit|title }}</td>
+                        {% endif %}
+                    {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 {% endblock %}
