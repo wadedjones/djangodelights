@@ -1,0 +1,14 @@
+{% extends 'inventory/base.html' %}
+
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+    <p>Are you sure you want to purchase {{ menu_item.title|title }}?</p>
+    <p><a href="{% url 'menulist' %}">Go Back</a></p>
+    <p>
+        <input type="submit" value="Confirm"/>
+    </p>
+</form>
+
+{% endblock %}

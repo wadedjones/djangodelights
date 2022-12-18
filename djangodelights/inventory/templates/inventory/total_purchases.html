@@ -1,0 +1,40 @@
+{% extends 'inventory/base.html' %}
+
+{% block title %}
+<title>Menu Items</title>
+{% endblock %}
+
+{% block content %}
+
+<table class="table table-hover table-borderless">
+    <thead>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Date</th>
+    </thead>
+    <tbody>
+        {% for purchase in purchases|dictsort:"timestamp" %}
+        <tr>
+            <th scope="row">{{ purchase.menu_item.title|title }}</th>
+            <td>${{ purchase.menu_item.price }}</td>
+            <td>{{ purchase.timestamp }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <th scope="row">Totals</th>
+            <th>${{ total_price }}</th>
+        </tr>
+        <tr>
+            <th scope="row">Inventory</th>
+            <th>-${{ inventory_cost }}</th>
+        </tr>
+        <tr>
+            <th scope="row">Revenue</th>
+            <th>${{ revenue }}</th>
+        </tr>
+    </tfoot>
+</table>
+
+{% endblock %}

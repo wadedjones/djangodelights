@@ -1,5 +1,9 @@
 {% extends 'inventory/base.html' %}
 
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
 {% block title %}
 <title>Add</title>
 {% endblock %}
@@ -7,7 +11,9 @@
 {% block content %}
 <form method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="SUBMIT"/>
+    {% bootstrap_form form %}
+    {% buttons %}
+    <button type="submit" class="btn btn-primary">Submit</button>
+    {% endbuttons %}
 </form>
 {% endblock %}

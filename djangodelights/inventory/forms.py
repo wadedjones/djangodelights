@@ -21,3 +21,8 @@ class MenuItemForm(forms.ModelForm):
 
     def get_absolute_url(self):
         return '/'
+
+class PurchaseForm(forms.ModelForm):
+    class Meta:
+        model = MenuItems
+        fields = '__all__'

@@ -92,3 +92,38 @@ def recipe_list(request):
     rr = RecipeRequirements.objects.all()
     context = {'menu_item': menu_item, 'rr': rr}
     return render(request, 'inventory/recipes.html', context)
+
+def purchase_item(request, pk):
+    menu_item = MenuItems.objects.get(id=pk)
+    if request.method == 'POST':
+        if menu_item.is_available():
+            purchase = Purchases(menu_item=menu_item)
+            purchase.save()
+            for item in purchase.menu_item.reciperequirements_set.all():
+                ingredient = item.ingredient
+                ingredient.quantity -= item.quantity
+                ingredient.save()
+            return redirect(menu_list)
+        else:
+            return render(request, 'inventory/out_of_stock.html')
+
+    context = {'menu_item': menu_item}
+    return render(request, 'inventory/purchase.html', context)
+
+def total_purchases(request):
+    purchases = Purchases.objects.all()
+    ingredients = Ingredients.objects.all()
+    total_price = 0
+    inventory_cost = 0
+    revenue = total_price - inventory_cost
+    for item in purchases:
+        total_price += item.menu_item.price
+    for item in ingredients:
+        inventory_cost += (item.quantity * item.unit_price)
+    context = {
+        'purchases': purchases, 
+        'total_price': total_price,
+        'inventory_cost': inventory_cost,
+        'revenue': revenue
+    }
+    return render(request, 'inventory/total_purchases.html', context)

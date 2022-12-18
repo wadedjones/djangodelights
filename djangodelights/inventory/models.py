@@ -23,7 +23,7 @@ class MenuItems(models.Model):
         return f'{self.title.title()} - ${self.price}'
 
     def is_available(self):
-        return all(x.in_stock for x in self.reciperequirements_set.all())
+        return all(x.in_stock() for x in self.reciperequirements_set.all())
 
 class RecipeRequirements(models.Model):
     ingredient = models.ForeignKey(
@@ -49,6 +49,8 @@ class Purchases(models.Model):
         on_delete=models.CASCADE
     )
     timestamp = models.DateTimeField(auto_now=True)
+    #for ingredient in menu_item.reciperequirements_set.all():
+        
 
     def __str__(self):
         return f"{self.menu_item.title.title()}: {self.timestamp}"
