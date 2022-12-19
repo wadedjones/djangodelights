@@ -13,5 +13,6 @@ urlpatterns = [
     path('delete_menu_item/<str:pk>', views.delete_menu_item, name='deletemenuitem'),
     path('recipes/', views.recipe_list, name='recipelist'),
     path('purchase/<str:pk>', views.purchase_item, name='purchaseitem'),
-    path('total_purchases/', views.total_purchases, name='totalpurchases')
+    path('total_purchases', views.total_purchases, name='totalpurchases'),
+    path('search_purchases/', views.search_purchases, name='searchpurchases')
 ]

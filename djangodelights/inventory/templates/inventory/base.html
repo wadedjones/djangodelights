@@ -1,4 +1,4 @@
-{% load bootstrap5 %}
+{% load bootstrap5 %}{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,9 +9,12 @@
 
         {% bootstrap_css %}
         {% bootstrap_javascript %}
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         
-        {% block title %}
-        {% endblock title %}
+        {% block title %}{% endblock title %}
+        {% block scripts %}{% endblock scripts %}
+        <link rel="stylesheet" href="{% static 'inventory/style.css' %}">
+
     </head>
     <body>
     <body>

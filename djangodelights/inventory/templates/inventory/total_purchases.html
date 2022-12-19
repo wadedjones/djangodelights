@@ -1,40 +1,26 @@
 {% extends 'inventory/base.html' %}
+{% load static %}
+
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 
 {% block title %}
 <title>Menu Items</title>
-{% endblock %}
+{% endblock title %}
+
+{% block scripts %}
+    <script src="{% static 'inventory/main.js' %}" defer></script>
+{% endblock scripts %}
 
 {% block content %}
 
-<table class="table table-hover table-borderless" style="white-space:nowrap; width:1%">
-    <thead>
-        <th scope="col">Name</th>
-        <th scope="col">Price</th>
-        <th scope="col">Date</th>
-    </thead>
-    <tbody>
-        {% for purchase in purchases|dictsort:"timestamp" %}
-        <tr>
-            <th scope="row">{{ purchase.menu_item.title|title }}</th>
-            <td>${{ purchase.menu_item.price }}</td>
-            <td>{{ purchase.timestamp }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-    <tfoot>
-        <tr>
-            <th scope="row" class="table-secondary">Totals</th>
-            <th class="table-secondary">${{ total_price }}</th>
-        </tr>
-        <tr>
-            <th scope="row" class="table-danger">Inventory</th>
-            <th class="table-danger">${{ inventory_cost }}</th>
-        </tr>
-        <tr>
-            <th scope="row" class="table-success">Revenue</th>
-            <th class="table-success">${{ revenue }}</th>
-        </tr>
-    </tfoot>
-</table>
-
+<div>
+    <form id="search-form" autocomplete="off">
+        {% csrf_token %}
+        <input type="text" id="search-input" class="search" placeholder="Search"/>
+    </form>
+    <div id="results-box" class="results-card not-visible">
+    </div>
+</div>
 {% endblock %}

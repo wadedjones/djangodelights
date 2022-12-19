@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from .forms import (
     IngredientForm,
-    MenuItemForm
+    MenuItemForm,
+    PurchaseForm
 )
 from .models import (
     Ingredients,
@@ -9,6 +10,8 @@ from .models import (
     RecipeRequirements,
     Purchases
 )
+from django.db.models import Q
+from django.http import JsonResponse
 
 def home(request):
     return render(request, 'inventory/home.html')
@@ -110,20 +113,27 @@ def purchase_item(request, pk):
     context = {'menu_item': menu_item}
     return render(request, 'inventory/purchase.html', context)
 
+
+def search_purchases(request):
+    if request.accepts('application/json'):
+        res = None
+        item = request.POST.get('menuItem')
+        qs = Purchases.objects.filter(Q(menu_item__title__icontains=item))
+        if len(qs) > 0 and len(item) > 0:
+            data = []
+            for i in qs:
+                mi = {
+                    'pk': i.menu_item.pk,
+                    'title': i.menu_item.title,
+                    'price': i.menu_item.price,
+                    'date': i.timestamp
+                }
+                data.append(mi)
+            res = data
+        else:
+            res = 'No Menu Items found ...'
+        return JsonResponse({'data': res})
+    return JsonResponse({})
+
 def total_purchases(request):
-    purchases = Purchases.objects.all()
-    ingredients = Ingredients.objects.all()
-    total_price = 0
-    inventory_cost = 0
-    revenue = total_price - inventory_cost
-    for item in purchases:
-        total_price += item.menu_item.price
-    for item in ingredients:
-        inventory_cost += (item.quantity * item.unit_price)
-    context = {
-        'purchases': purchases, 
-        'total_price': total_price,
-        'inventory_cost': inventory_cost,
-        'revenue': revenue
-    }
-    return render(request, 'inventory/total_purchases.html', context)
+    return render(request, 'inventory/total_purchases.html')
