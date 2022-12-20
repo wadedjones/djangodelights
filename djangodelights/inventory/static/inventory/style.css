@@ -1,3 +1,7 @@
+.search {
+    margin: 10px;
+}
+
 .search:focus {
     background-color:rgb(211, 230, 238);
 }
@@ -20,4 +24,21 @@
 
 .results {
     color:rgb(81, 89, 92)
+}
+
+.menu-item {
+    padding: 10px 10px 10px 10px;
+}
+
+.right-row {
+    text-align: right;
+}
+
+.menu-item-link a {
+    text-decoration: none;
+    color: black;
+}
+
+.menu-item-link a:hover {
+    color:rgb(122, 122, 122);
 }

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import (
     IngredientForm,
     MenuItemForm,
@@ -90,8 +90,8 @@ def delete_menu_item(request, pk):
     context = {'menu_item': menu_item}
     return render(request, 'inventory/delete_menu_item.html', context)
 
-def recipe_list(request):
-    menu_item = MenuItems.objects.all()
+def recipe_list(request, pk):
+    menu_item = get_object_or_404(MenuItems, pk=pk)
     rr = RecipeRequirements.objects.all()
     context = {'menu_item': menu_item, 'rr': rr}
     return render(request, 'inventory/recipes.html', context)
@@ -112,6 +112,11 @@ def purchase_item(request, pk):
 
     context = {'menu_item': menu_item}
     return render(request, 'inventory/purchase.html', context)
+
+def total_purchases(request):
+    purchases = Purchases.objects.all()
+    context = {'purchases': purchases}
+    return render(request, 'inventory/total_purchases.html', context)
 
 
 def search_purchases(request):
@@ -135,5 +140,23 @@ def search_purchases(request):
         return JsonResponse({'data': res})
     return JsonResponse({})
 
-def total_purchases(request):
-    return render(request, 'inventory/total_purchases.html')
+def search_recipe_list(request):
+    if request.accepts('application/json'):
+        res = None
+        item = request.POST.get('recipe')
+        qs = MenuItems.objects.filter(Q(title__icontains=item))
+        print(qs)
+        if len(qs) > 0 and len(item) > 0:
+            data = []
+            for i in qs:
+                ri = {
+                    'pk': i.pk,
+                    'title': i.title,
+                    'price': i.price
+                }
+                data.append(ri)
+            res = data
+        else:
+            res = 'No menu items found...'
+        return JsonResponse({'data': res})
+    return JsonResponse({})

@@ -23,4 +23,16 @@
     <div id="results-box" class="results-card not-visible">
     </div>
 </div>
+
+<div>
+    <table class="table table-hover table-borderless" style="width:40%">
+        {% for purchase in purchases|dictsortreversed:"timestamp" %}
+        <tr>
+            <td scope="row">{{ purchase.menu_item.title|title }}</td>
+            <td scope="row">${{ purchase.menu_item.price }}</td>
+            <td scope="row">{{ purchase.timestamp }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 {% endblock %}
