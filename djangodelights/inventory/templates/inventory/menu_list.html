@@ -15,7 +15,7 @@
 
 {% block content %}
 
-<table class="table table-hover table-borderless" style="white-space:nowrap; width:1%">
+<table id="menu-table" class="table table-hover table-borderless" style="white-space:nowrap; width:1%">
     <thead>
         <th scope="col">Name</th>
         <th scope="col">Price</th>
@@ -38,9 +38,11 @@
         {% endfor %}
     </tbody>
 </table>
-<a href="{% url 'addmenuitem' %}">
-<button type="button" class="btn btn-primary">Add Menu Item</button></a>
-<div>
+
+
+<div class="container-fluid">
+    <a href="{% url 'addmenuitem' %}">
+        <button type="button" class="btn btn-primary">Add Menu Item</button></a>
     <form id="search-form" autocomplete="off">
         {% csrf_token %}
         <input type="text" id="search-input" class="search" placeholder="Search"/>

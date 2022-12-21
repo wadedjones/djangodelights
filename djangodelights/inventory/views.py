@@ -12,6 +12,7 @@ from .models import (
 )
 from django.db.models import Q
 from django.http import JsonResponse
+from django.views.generic.dates import WeekArchiveView
 
 def home(request):
     return render(request, 'inventory/home.html')
@@ -160,3 +161,9 @@ def search_recipe_list(request):
             res = 'No menu items found...'
         return JsonResponse({'data': res})
     return JsonResponse({})
+
+class PurchaseWeekArchiveView(WeekArchiveView):
+    queryset = Purchases.objects.all()
+    date_field = 'timestamp'
+    week_format = '%W'
+    allow_futuer = True
