@@ -14,32 +14,47 @@
 {% endblock scripts %}
 
 {% block content %}
-
-<table id="menu-table" class="table table-hover table-borderless" style="white-space:nowrap; width:1%">
-    <thead>
-        <th scope="col">Name</th>
-        <th scope="col">Price</th>
-        <th scope="col">Action</th>
-    </thead>
-    <tbody>
-        {% for item in menu_items %}
-        <tr>
-            <th class="menu-item-link" scope="row"><a href="{% url 'recipelist' item.id %}">{{ item.title|title }}</a></th>
-            <td>${{ item.price }}</td>
-            <td>
-                <a href="{% url 'purchaseitem' item.id %}">
-                <button type="button" class="btn btn-outline-primary btn-sm">Purchase</button></a>
-                <a href="{% url 'editmenuitem' item.id %}">
-                <button type="button" class="btn btn-outline-secondary btn-sm">Edit</button></a>
-                <a href="{% url 'deletemenuitem' item.id %}">
-                <button type="button" class="btn btn-outline-danger btn-sm">Remove</button></a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
-
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <table id="menu-table" class="table table-hover table-borderless" style="white-space:nowrap; width:1%">
+                <thead>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Action</th>
+                </thead>
+                <tbody>
+                    {% for item in menu_items %}
+                    <tr>
+                        <th class="menu-item-link" scope="row"><a href="{% url 'recipelist' item.id %}">{{ item.title|title }}</a></th>
+                        <td>${{ item.price }}</td>
+                        <td>
+                            <a href="{% url 'purchaseitem' item.id %}">
+                            <button type="button" class="btn btn-outline-primary btn-sm">Purchase</button></a>
+                            <a href="{% url 'editmenuitem' item.id %}">
+                            <button type="button" class="btn btn-outline-secondary btn-sm">Edit</button></a>
+                            <a href="{% url 'deletemenuitem' item.id %}">
+                            <button type="button" class="btn btn-outline-danger btn-sm">Remove</button></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-auto">
+            <a href="{% url 'addmenuitem' %}">
+                <button type="button" class="btn btn-primary">Add Menu Item</button></a>
+            <form id="search-form" autocomplete="off">
+                {% csrf_token %}
+                <input type="text" id="search-input" class="search" placeholder="Search"/>
+            </form> 
+        </div>
+        <div class="col-5">
+            <div id="results-box" class="results-card not-visible"> 
+        </div>
+    </div>
+</div>
+<!--
 <div class="container-fluid">
     <a href="{% url 'addmenuitem' %}">
         <button type="button" class="btn btn-primary">Add Menu Item</button></a>
@@ -51,4 +66,5 @@
 
     </div>
 </div>
+-->
 {% endblock %}
