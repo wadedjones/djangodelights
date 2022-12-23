@@ -139,6 +139,7 @@ def search_recipe_list(request):
     if request.accepts('application/json'):
         res = None
         item = request.POST.get('recipe')
+        print(item)
         qs = MenuItems.objects.filter(Q(title__icontains=item))
         print(qs)
         if len(qs) > 0 and len(item) > 0:

@@ -1,31 +1,54 @@
 {% extends 'inventory/base.html' %}
+{% load static %}
+
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block title %}
+<title>Ingredients</title>
+{% endblock %}
 
 {% block content %}
-<table class="table table-hover table-borderless" style="white-space:nowrap; width:1%">
-    <thead>
-        <th scope="col">Name</th>
-        <th scope="col">Quantity</th>
-        <th scope="col">Unit</th>
-        <th scope="col">Price/Unit</th>
-        <th scope="col">Action</th>
-    </thead>
-    <tbody>
-        {% for item in ingredients %}
-        <tr>
-            <th scope="row">{{ item.name|title }}</th>
-            <td>{{ item.quantity }}</td>
-            <td>{{ item.unit }}</td>
-            <td>{{ item.unit_price }}</td>
-            <td><a href="{% url 'editingredient' item.id %}">
-                <button type="button" class="btn btn-outline-primary btn-sm">Update</button></a>
-                <a href="{% url 'deleteingredient' item.id %}">
-                <button type="button" class="btn btn-outline-danger btn-sm">Remove</button></a></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-<a href="{% url 'addingredient' %}">
-<button type="button" class="btn btn-primary">Add Ingredient</button>
-</a>
+<div class="container">
+    <div class="row">
+        <div class="col col-6 p-3">
+            <table id="menu-table" class="table table-hover table-borderless" style="white-space:nowrap; width:1%">
+                <thead>
+                    <th scope="col">Name</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Unit</th>
+                    <th scope="col">Price/Unit</th>
+                    <th scope="col">Action</th>
+                </thead>
+                <tbody>
+                    {% for item in ingredients %}
+                    <tr>
+                        <th scope="row">{{ item.name|title }}</th>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.unit }}</td>
+                        <td>{{ item.unit_price }}</td>
+                        <td><a href="{% url 'editingredient' item.id %}">
+                            <button type="button" class="btn btn-outline-primary btn-sm">Update</button></a>
+                            <a href="{% url 'deleteingredient' item.id %}">
+                            <button type="button" class="btn btn-outline-danger btn-sm">Remove</button></a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-3 offset-md-3">
+            <div id="results-box" class="results-card not-visible text-right bg-dark rounded-bottom"></div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <a href="{% url 'addingredient' %}">
+            <button type="button" class="btn btn-primary">Add Ingredient</button>
+            </a>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

@@ -7,21 +7,30 @@
 
 {% block content %}
 
-<div class="menu-item">
-    <h3>{{ menu_item.title }}</h3>
-    <div class="ingredient-list-row">
-        <table class="table table-hover table-borderless" style="width:40%">
-        {% for item in rr %}
-            {% if item.menu_item.id == menu_item.id %}
-            <tr>
-                <td class="left-row" scope="row">{{ item.ingredient.name|title }}</td>
-                <td class="right-row" scope="row">{{ item.quantity }} {{ item.ingredient.unit|title }}</td>
-                <td class="right-row" scope="row">Remaining: {{ item.ingredient.quantity }}</td>
-            </tr>
-            {% endif %}
-        {% endfor %} 
-        </table>
+<div class="container">
+    <div class="row">
+        <div class="col p-3">
+            <div class="menu-item">
+                <h3>{{ menu_item.title }}</h3>
+                <div class="ingredient-list-row">
+                    <table class="table table-hover table-borderless" style="white-space:nowrap; width:1%">
+                    {% for item in rr %}
+                        {% if item.menu_item.id == menu_item.id %}
+                        <tr>
+                            <td class="left-row" scope="row">{{ item.ingredient.name|title }}</td>
+                            <td class="right-row" scope="row">{{ item.quantity }} {{ item.ingredient.unit|title }}</td>
+                            <td class="right-row" scope="row">Remaining: {{ item.ingredient.quantity }}</td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %} 
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-3 offset-md-3">
+            <div id="results-box" class="results-card not-visible text-right bg-dark rounded-bottom"></div>
     </div>
 </div>
+
 
 {% endblock %}

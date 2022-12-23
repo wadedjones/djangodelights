@@ -1,12 +1,29 @@
 {% extends 'inventory/base.html' %}
+{% load static %}
+
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 
 {% block content %}
-<h3>Add Menu Item</h3>
 
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit"/>
-</form>
+<div class="container">
+    <div class="row">
+        <div class="col p-3">
+            <h5 class="display-6">Add Menu Item</h5>
+            <form method="POST">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% buttons %}
+                <button type="submit" class="btn btn-primary">Submit</button>
+                {% endbuttons %}
+            </form>
+        </div>
+        <div class="col-3 offset-md-3">
+            <div id="results-box" class="results-card not-visible text-right bg-dark rounded-bottom"></div>
+    </div>
+</div>
+
+
 
 {% endblock %}

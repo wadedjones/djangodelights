@@ -1,4 +1,5 @@
 const url = window.location.origin
+console.log(url)
 const searchForm = document.getElementById('search-form')
 const searchInput = document.getElementById('search-input')
 const resultsBox = document.getElementById('results-box')
@@ -7,7 +8,7 @@ const csrf = document.getElementsByName('csrfmiddlewaretoken')[0].value
 const sendSearchData = (recipe) => {
     $.ajax({
         type: 'POST',
-        url: 'search_recipe_list/',
+        url: '/search_recipe_list/',
         data: {
             'csrfmiddlewaretoken': csrf,
             'recipe': recipe
@@ -24,7 +25,7 @@ const sendSearchData = (recipe) => {
                         
                             <div class="row mt-2 mb-2">
                                 <div class="col-10 results">
-                                <h5>${recipe.title}</h5> $${recipe.price}
+                                <p>${recipe.title} $${recipe.price}</p>
                                 </div>
                             </div>
                         
@@ -54,3 +55,16 @@ searchInput.addEventListener('keyup', e=> {
 
     sendSearchData(e.target.value)
 })
+
+const table = document.getElementById('menuItems')
+var sumValue = 0
+for (var i=0; i < table.rows.length; i++) {
+    sumValue = sumValue + parseFloat(table.rows[i].cells[1].innerHTML);
+}
+
+document.getElementById('totalPrice').innerHTML = "$" + parseFloat(sumValue).toFixed(2);
+
+let moneyCell = Array.prototype.slice.call(document.querySelectorAll(".currency"));
+moneyCell.forEach(function(cell){
+    cell.textContext = (+cell.textContext).toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+});

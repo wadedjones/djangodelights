@@ -1,14 +1,31 @@
 {% extends 'inventory/base.html' %}
+{% load static %}
+
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 
 {% block content %}
 
-<form method="POST">
-    {% csrf_token %}
-    <p>Are you sure you want to delete {{ ingredient.name|title }}?</p>
-    <p><a href="{% url 'ingredientlist' %}">Go Back</a></p>
-    <p>
-        <input type="submit" value="Confirm"/>
-    </p>
-</form>
+<div class="container">
+    <div class="row">
+        <div class="col p-3">
+            <form method="POST">
+                {% csrf_token %}
+                <p>Are you sure you want to delete {{ ingredient.name|title }}?</p>
+                <p><a href="{% url 'ingredientlist' %}">Go Back</a></p>
+                <p>
+                    {% buttons %}
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    {% endbuttons %}
+                </p>
+            </form>
+        </div>
+        <div class="col-3 offset-md-3">
+            <div id="results-box" class="results-card not-visible text-right bg-dark rounded-bottom"></div>
+    </div>
+</div>
+
+
 
 {% endblock %}
