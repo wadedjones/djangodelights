@@ -1,28 +1,30 @@
-const url = window.location.href
+const url = window.location.origin
 const searchForm = document.getElementById('search-form')
 const searchInput = document.getElementById('search-input')
 const resultsBox = document.getElementById('results-box')
 const csrf = document.getElementsByName('csrfmiddlewaretoken')[0].value
 
-const sendSearchData = (menuItem) => {
+const sendSearchData = (recipe) => {
     $.ajax({
         type: 'POST',
-        url: 'search_purchases/',
+        url: 'search_recipe_list/',
         data: {
             'csrfmiddlewaretoken': csrf,
-            'menuItem': menuItem
+            'recipe': recipe
         },
         success: (res)=> {
             console.log(res)
             const data = res.data
             if (Array.isArray(data)) {
                 resultsBox.innerHTML = ""
-                data.forEach(menuItem=> {
+                console.log(url)
+                data.forEach(recipe=> {
                     resultsBox.innerHTML += `
-                        <a href="#" class="item">
+                        <a href="${url}/recipe_list/${recipe.pk}" class="item">
+                        
                             <div class="row mt-2 mb-2">
                                 <div class="col-10 results">
-                                <h5>${menuItem.title}</h5> $${menuItem.price}: ${menuItem.date}
+                                <h5>${recipe.title}</h5> $${recipe.price}
                                 </div>
                             </div>
                         

@@ -114,12 +114,6 @@ def purchase_item(request, pk):
     context = {'menu_item': menu_item}
     return render(request, 'inventory/purchase.html', context)
 
-def total_purchases(request):
-    purchases = Purchases.objects.all()
-    context = {'purchases': purchases}
-    return render(request, 'inventory/total_purchases.html', context)
-
-
 def search_purchases(request):
     if request.accepts('application/json'):
         res = None
