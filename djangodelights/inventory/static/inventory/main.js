@@ -68,3 +68,7 @@ let moneyCell = Array.prototype.slice.call(document.querySelectorAll(".currency"
 moneyCell.forEach(function(cell){
     cell.textContext = (+cell.textContext).toLocaleString('en-US', {style: 'currency', currency: 'USD'});
 });
+
+$('.carousel').carousel({
+    interval: 100
+  })

@@ -1,8 +1,21 @@
 {% extends 'inventory/base.html' %}
+{% load static %}
+
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 
 {% block content %}
 
-<p>Sorry, this menu item is out of stock!</p>
-<a href="{% url 'menulist' %}">Go Back</a>
+<div class="container">
+    <div class="row">
+        <div class="col p-3">
+            <p>Sorry, this menu item is out of stock!</p>
+            <a href="{% url 'menulist' %}">Go Back</a>
+        </div>
+        <div class="col-3 offset-md-3">
+            <div id="results-box" class="results-card not-visible text-right bg-dark rounded-bottom"></div>
+    </div>
+</div>
 
 {% endblock %}
