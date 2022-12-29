@@ -15,5 +15,7 @@ urlpatterns = [
     path('purchase/<str:pk>', views.purchase_item, name='purchaseitem'),
     path('search_purchases', views.search_purchases, name='searchpurchases'),
     path('search_recipe_list/', views.search_recipe_list, name='searchrecipelist'),
-    path('<int:year>/week/<int:week>', views.PurchaseWeekArchiveView.as_view(), name='archiveweek')
+    path('<int:year>/week/<int:week>', views.PurchaseWeekArchiveView.as_view(), name='archiveweek'),
+    path('jsonresponse/purchases', views.purchases_test, name='purchasestest'),
+    path('purchase_test', views.purchase_test, name='purchasetest')
 ]

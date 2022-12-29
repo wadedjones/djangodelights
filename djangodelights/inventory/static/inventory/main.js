@@ -71,4 +71,5 @@ moneyCell.forEach(function(cell){
 
 $('.carousel').carousel({
     interval: 100
-  })
+  });
+

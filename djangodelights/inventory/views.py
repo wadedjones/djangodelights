@@ -162,3 +162,15 @@ class PurchaseWeekArchiveView(WeekArchiveView):
     date_field = 'timestamp'
     week_format = '%W'
     allow_futuer = True
+
+def purchases_test(request):
+    result_list = list(Purchases.objects.all().values(
+        'menu_item__title',
+        'menu_item__price',
+        'timestamp'
+    ))
+    return JsonResponse(result_list, safe=False)
+
+def purchase_test(request):
+    context = {}
+    return render(request, 'inventory/purchase_test.html', context)
