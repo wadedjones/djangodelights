@@ -171,6 +171,6 @@ def purchases_test(request):
     ))
     return JsonResponse(result_list, safe=False)
 
-def purchase_test(request):
+def purchase_table(request):
     context = {}
-    return render(request, 'inventory/purchase_test.html', context)
+    return render(request, 'inventory/purchase_table.html', context)

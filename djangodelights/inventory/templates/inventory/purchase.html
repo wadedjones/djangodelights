@@ -11,9 +11,7 @@
                 <p>Are you sure you want to purchase {{ menu_item.title|title }}?</p>
                 <p><a href="{% url 'menulist' %}">Go Back</a></p>
                 <p>
-                    {% buttons %}
                     <button type="submit" class="btn btn-primary">Submit</button>
-                    {% endbuttons %}
                 </p>
             </form>
         </div>

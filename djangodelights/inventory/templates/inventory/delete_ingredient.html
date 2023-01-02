@@ -11,9 +11,7 @@
                 <p>Are you sure you want to delete {{ ingredient.name|title }}?</p>
                 <p><a href="{% url 'ingredientlist' %}">Go Back</a></p>
                 <p>
-                    {% buttons %}
                     <button type="submit" class="btn btn-primary">Submit</button>
-                    {% endbuttons %}
                 </p>
             </form>
         </div>

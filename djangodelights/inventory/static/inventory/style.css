@@ -24,7 +24,7 @@ a:hover {
 }
 
 .results {
-    color:rgb(255, 255, 255);
+    color:rgb(0, 0, 0);
 }
 
 .menu-item {
@@ -42,4 +42,8 @@ a:hover {
 
 .menu-item-link a:hover {
     color:rgb(122, 122, 122);
+}
+
+.purchase-data {
+    padding-top: 10px;
 }
