@@ -169,8 +169,10 @@ def purchases_test(request):
         'menu_item__price',
         'timestamp'
     ))
+    print(result_list)
     return JsonResponse(result_list, safe=False)
 
 def purchase_table(request):
-    context = {}
+    purchase_items = Purchases.objects.all()
+    context = {'purchase_items': purchase_items}
     return render(request, 'inventory/purchase_table.html', context)

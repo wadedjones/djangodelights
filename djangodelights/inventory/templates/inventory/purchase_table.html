@@ -1,21 +1,41 @@
 {% extends 'inventory/base.html' %}
 
+
 {% block content %}
 
-<div class="container purchase-data">
-    <div class="row justify-content-md-center">
-        <div class="col-lg-10">
-            <table id="menuTable" class="table table-hover table-borderless">
+<div class="container">
+    <div class="row">
+        <div class="col col-6 p-3">
+            <table id="testTable" class="table" data-show-footer="true">
                 <thead>
                     <tr>
-                        <th>Menu Item</th>
-                        <th>Menu Price</th>
-                        <th>Time</th>
+                        <th class="th-sm">Title</th>
+                        <th data-field="price" data-searchable="true" data-footer-formatter="priceFormatter" class="th-sm">Price</th>
+                        <th class="th-sm">Date</th>
                     </tr>
                 </thead>
-            </table> 
+                <tbody>
+                    {% for item in purchase_items|dictsortreversed:"timestamp" %}
+                    <tr>
+                        <td>{{ item.menu_item.title }}</td>
+                        <td>{{ item.menu_item.price }}</td>
+                        <td>{{ item.timestamp }}</td>     
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>Total:</td>
+                        <td id="totalPrice"></td>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
+        <div class="col col-3 offset-md-3 results-box-div">
+            <div id="results-box" class="results-card not-visible text-right bg-dark rounded-bottom"></div>
     </div>
 </div>
 
+
 {% endblock %}
+

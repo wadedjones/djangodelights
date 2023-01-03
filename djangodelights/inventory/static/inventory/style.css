@@ -24,7 +24,7 @@ a:hover {
 }
 
 .results {
-    color:rgb(0, 0, 0);
+    color:rgb(187, 187, 187);
 }
 
 .menu-item {
@@ -37,11 +37,11 @@ a:hover {
 
 .menu-item-link a {
     text-decoration: none;
-    color: rgb(0, 0, 0);
+    color: rgb(60, 60, 60);
 }
 
 .menu-item-link a:hover {
-    color:rgb(122, 122, 122);
+    color:rgb(186, 186, 186);
 }
 
 .purchase-data {
