@@ -9,14 +9,12 @@
             <form method="POST">
                 {% csrf_token %}
                 <p>Are you sure you want to delete {{ ingredient.name|title }}?</p>
-                <p><a href="{% url 'ingredientlist' %}">Go Back</a></p>
+                <p><a href="{% url 'inventory:ingredientlist' %}">Go Back</a></p>
                 <p>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </p>
             </form>
         </div>
-        <div class="col-3 offset-md-3">
-            <div id="results-box" class="results-card not-visible text-right bg-dark rounded-bottom"></div>
     </div>
 </div>
 

@@ -47,3 +47,24 @@ a:hover {
 .purchase-data {
     padding-top: 10px;
 }
+
+.userlinks {
+    color:rgb(186, 186, 186);
+    text-decoration: none;
+}
+
+.userlinks a:hover {
+    color:rgb(233, 233, 233);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+  }

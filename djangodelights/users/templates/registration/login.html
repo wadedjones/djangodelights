@@ -1,0 +1,23 @@
+{% extends "inventory/base.html" %}
+
+{% block content %}
+
+{% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+<div class="container">
+    <div class="row">
+        <div class="col p-3">
+            <form method="post" action="{% url 'users:login' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-outline-dark" name="submit">Log in</button>
+                <input type="hidden" name="next" value="{% url 'inventory:home' %}">
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -33,7 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # my apps
     "inventory",
-    "bootstrap5",
+    "users",
     
     "django.contrib.admin",
     "django.contrib.auth",
@@ -147,5 +147,7 @@ def patch_broken_pipe_error():
 
     BaseServer = my_handle_error
     handlers.BaseHandler.log_exception = my_log_exception
+
+LOGIN_URL = 'users:login'
 
 patch_broken_pipe_error()

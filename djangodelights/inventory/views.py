@@ -12,16 +12,18 @@ from .models import (
 )
 from django.db.models import Q
 from django.http import JsonResponse
-from django.views.generic.dates import WeekArchiveView
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     return render(request, 'inventory/home.html')
 
+@login_required
 def ingredient_list(request):
     ingredients = Ingredients.objects.all()
     context = {'ingredients': ingredients}
     return render(request, 'inventory/ingredient_list.html', context)
 
+@login_required
 def add_ingredient(request):
     form = IngredientForm()
     if request.method == 'POST':
@@ -33,6 +35,7 @@ def add_ingredient(request):
     context = {'form': form}
     return render(request, 'inventory/add_ingredient.html', context)
 
+@login_required
 def edit_ingredient(request, pk):
     ingredient = Ingredients.objects.get(id=pk)
     form = IngredientForm(instance=ingredient)
@@ -45,6 +48,7 @@ def edit_ingredient(request, pk):
     context = {'ingredient': ingredient, 'form': form}
     return render(request, 'inventory/edit_ingredient.html', context)
 
+@login_required
 def delete_ingredient(request, pk):
     ingredient = Ingredients.objects.get(id=pk)
     if request.method == 'POST':
@@ -59,17 +63,19 @@ def menu_list(request):
     context = {'menu_items': menu_items}
     return render(request, 'inventory/menu_list.html', context)
 
+@login_required
 def add_menu_item(request):
     form = MenuItemForm()
     if request.method == 'POST':
         form = MenuItemForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect(menu_list)
+            return redirect('inventory:menulist')
 
     context = {'form': form}
     return render(request, 'inventory/add_menu_item.html', context)
 
+@login_required
 def edit_menu_item(request, pk):
     menu_item = MenuItems.objects.get(id=pk)
     form = MenuItemForm(instance=menu_item)
@@ -77,11 +83,12 @@ def edit_menu_item(request, pk):
         form = MenuItemForm(request.POST, request.FILES, instance=menu_item)
         if form.is_valid():
             form.save()
-            return redirect(menu_list)
+            return redirect('inventory:menulist')
 
     context = {'menu_item': menu_item, 'form': form}
     return render(request, 'inventory/edit_menu_item.html', context)
 
+@login_required
 def delete_menu_item(request, pk):
     menu_item = MenuItems.objects.get(id=pk)
     if request.method == 'POST':
@@ -91,12 +98,14 @@ def delete_menu_item(request, pk):
     context = {'menu_item': menu_item}
     return render(request, 'inventory/delete_menu_item.html', context)
 
+@login_required
 def recipe_list(request, pk):
     menu_item = get_object_or_404(MenuItems, pk=pk)
     rr = RecipeRequirements.objects.all()
     context = {'menu_item': menu_item, 'rr': rr}
     return render(request, 'inventory/recipes.html', context)
 
+@login_required
 def purchase_item(request, pk):
     menu_item = MenuItems.objects.get(id=pk)
     if request.method == 'POST':
@@ -107,71 +116,14 @@ def purchase_item(request, pk):
                 ingredient = item.ingredient
                 ingredient.quantity -= item.quantity
                 ingredient.save()
-            return redirect(menu_list)
+            return redirect('inventory:menulist')
         else:
             return render(request, 'inventory/out_of_stock.html')
 
     context = {'menu_item': menu_item}
     return render(request, 'inventory/purchase.html', context)
 
-def search_purchases(request):
-    if request.accepts('application/json'):
-        res = None
-        item = request.POST.get('menuItem')
-        qs = Purchases.objects.filter(Q(menu_item__title__icontains=item))
-        if len(qs) > 0 and len(item) > 0:
-            data = []
-            for i in qs:
-                mi = {
-                    'pk': i.menu_item.pk,
-                    'title': i.menu_item.title,
-                    'price': i.menu_item.price,
-                    'date': i.timestamp
-                }
-                data.append(mi)
-            res = data
-        else:
-            res = 'No Menu Items found ...'
-        return JsonResponse({'data': res})
-    return JsonResponse({})
-
-def search_recipe_list(request):
-    if request.accepts('application/json'):
-        res = None
-        item = request.POST.get('recipe')
-        print(item)
-        qs = MenuItems.objects.filter(Q(title__icontains=item))
-        print(qs)
-        if len(qs) > 0 and len(item) > 0:
-            data = []
-            for i in qs:
-                ri = {
-                    'pk': i.pk,
-                    'title': i.title,
-                    'price': i.price
-                }
-                data.append(ri)
-            res = data
-        else:
-            res = 'No menu items found...'
-        return JsonResponse({'data': res})
-    return JsonResponse({})
-
-class PurchaseWeekArchiveView(WeekArchiveView):
-    queryset = Purchases.objects.all()
-    date_field = 'timestamp'
-    week_format = '%W'
-    allow_futuer = True
-
-def purchases_test(request):
-    result_list = list(Purchases.objects.all().values(
-        'menu_item__title',
-        'menu_item__price',
-        'timestamp'
-    ))
-    print(result_list)
-    return JsonResponse(result_list, safe=False)
-
+@login_required
 def purchase_table(request):
     purchase_items = Purchases.objects.all()
     context = {'purchase_items': purchase_items}
