@@ -1,3 +1,29 @@
+.body-bg {
+    background-color: #efedd8;
+}
+
+.home-bg {
+    border: solid;
+    background-size: contain;
+    background-image: url("https://flashbak.com/wp-content/uploads/2017/04/Vicky-Dec-48-nn-19.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0 auto;
+    margin-top: 1%;
+    padding: 1% 1% 1% 1%;
+}
+
+.home-description {
+    color: antiquewhite;
+    font-size: 100px;
+    text-shadow:
+        -4px -4px 0 #000,
+        4px -4px 0 #000,
+        -4px 4px 0 #000,
+        4px 4px 0 #000;
+}
+
 a:hover {
     text-decoration: none;
 }
@@ -68,3 +94,7 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance: textfield;
   }
+
+td {
+    background-color: #efedd8;
+}

@@ -12,6 +12,7 @@ from .models import (
 )
 from django.db.models import Q
 from django.http import JsonResponse
+from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
 
 def home(request):
@@ -43,7 +44,7 @@ def edit_ingredient(request, pk):
         form = IngredientForm(request.POST, request.FILES, instance=ingredient)
         if form.is_valid():
             form.save()
-            return redirect(ingredient_list)
+            return redirect('inventory:ingredientlist')
     
     context = {'ingredient': ingredient, 'form': form}
     return render(request, 'inventory/edit_ingredient.html', context)
@@ -126,5 +127,10 @@ def purchase_item(request, pk):
 @login_required
 def purchase_table(request):
     purchase_items = Purchases.objects.all()
-    context = {'purchase_items': purchase_items}
+    total = Purchases.objects.aggregate(Sum('menu_item__price'))['menu_item__price__sum']
+    total = '{:0.2f}'.format(total)
+    context = {
+        'purchase_items': purchase_items,
+        'total': total,
+        }
     return render(request, 'inventory/purchase_table.html', context)

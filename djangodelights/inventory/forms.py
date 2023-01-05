@@ -10,6 +10,24 @@ class IngredientForm(forms.ModelForm):
     class Meta:
         model = Ingredients
         fields = '__all__'
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class':'form-control',
+                'id':'name-form'
+            }),
+            'quantity': forms.TextInput(attrs={
+                'class':'form-control',
+                'id':'quantity-form'
+            }),
+            'unit': forms.TextInput(attrs={
+                'class':'form-control',
+                'id':'unit-form'
+            }),
+            'unit_price': forms.TextInput(attrs={
+                'class':'form-control',
+                'id':'unit-price-form'
+            })
+        }
 
     def get_absolute_url(self):
         return '/'

@@ -9,15 +9,16 @@
 
 {% block content %}
 
-<div class="container">
+<div class="container home-bg">
     <div class="row">
-        <div class="col col-6 p-3">
+        <div class="col home-description">
+            <p style="padding-left:2%">Restaurant</p>
+            <p style="padding-left:8%">Inventory</p>
+            <p style="padding-left:16%">Madness</p>
+        </div>
+        <div class="col align-self-end offset-md-6">
             {% if user.is_authenticated %}
-            Hello, {{ user.username }}
-            {% else %}
-            <a class="userlinks pe-3" href="{% url 'users:login' %}">
-                <button type="button" class="btn btn-link" data-mdb-ripple-color="dark" style="color:black">Log in</button>
-            </a>
+            <p style="color:antiquewhite; font-size:18px; background-color:black; text-align:center">Hello, {{ user.username }}</p>
             {% endif %}
         </div>
     </div>

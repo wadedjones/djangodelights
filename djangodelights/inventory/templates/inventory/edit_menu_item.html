@@ -11,13 +11,18 @@
 
 <div class="container">
     <div class="row">
-        <div class="col p-3">
+        <div class="col-6 p-3">
             <form method="POST">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <p>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </p>
+                <div class="form-outline mb-4">
+                    {{ form.title }}
+                    <label class="form-label" for="title-form">Title</label>
+                </div>
+                <div class="form-outline mb-4">
+                    {{ form.price }}
+                    <label class="form-label" for="price-form">Price</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>

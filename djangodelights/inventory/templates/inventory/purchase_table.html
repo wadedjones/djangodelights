@@ -17,7 +17,7 @@
                     {% for item in purchase_items|dictsortreversed:"timestamp" %}
                     <tr>
                         <td>{{ item.menu_item.title }}</td>
-                        <td>{{ item.menu_item.price }}</td>
+                        <td>${{ item.menu_item.price }}</td>
                         <td>{{ item.timestamp }}</td>     
                     </tr>
                     {% endfor %}
@@ -25,10 +25,13 @@
                 <tfoot>
                     <tr>
                         <td>Total:</td>
-                        <td id="totalPrice"></td>
+                        <td>${{ total }}</td>
                     </tr>
                 </tfoot>
             </table>
+        </div>
+        <div class="col col-6 p-3">
+            <img src="https://as2.ftcdn.net/v2/jpg/04/51/08/13/1000_F_451081320_RC10HGGrW4ycJbNr5hJ5QokeqOTDsrlm.jpg" class="img-fluid rounded">
         </div>
     </div>
 </div>
