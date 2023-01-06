@@ -4,12 +4,26 @@
 
 <div class="container">
     <div class="row">
-        <div class="col p-3">
+        <div class="col-6 p-3">
             <form method="post" action="{% url 'users:register' %}">
                 {% csrf_token %}
-                {{ form.as_p }}
+                <div class="form-outline mb-4">
+                    {{ form.username }}
+                    <label class="form-label" for="username-form">Username</label>
+                </div>
+                <div class="form-outline mb-4">
+                    {{ form.email }}
+                    <label class="form-label" for="email-form">Email</label>
+                </div>
+                <div class="form-outline mb-4">
+                    {{ form.password1 }}
+                    <label class="form-label" for="password1-form">Password</label>
+                </div>
+                <div class="form-outline mb-4">
+                    {{ form.password2 }}
+                    <label class="form-label" for="password2-form">Confirm Password</label>
+                </div>
                 <button class="btn btn-outline-dark" name="submit">Register</button>
-                <input type="hidden" name="next" value="{% url 'inventory:home' %}" />
             </form>
         </div>
     </div>

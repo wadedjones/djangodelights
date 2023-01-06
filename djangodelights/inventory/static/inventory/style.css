@@ -95,6 +95,10 @@ input[type=number] {
     -moz-appearance: textfield;
   }
 
-td {
-    background-color: #efedd8;
+table tbody tr td {
+    background-color: #efedd8 !important;
+}
+
+table tbody tr th {
+    background-color: #efedd8 !important;
 }

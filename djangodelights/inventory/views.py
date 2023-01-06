@@ -31,7 +31,7 @@ def add_ingredient(request):
         form = IngredientForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect(ingredient_list)
+            return redirect('inventory:ingredientlist')
     
     context = {'form': form}
     return render(request, 'inventory/add_ingredient.html', context)
@@ -59,6 +59,7 @@ def delete_ingredient(request, pk):
     context = {'ingredient': ingredient}
     return render(request, 'inventory/delete_ingredient.html', context)
 
+@login_required
 def menu_list(request):
     menu_items = MenuItems.objects.all()
     context = {'menu_items': menu_items}
